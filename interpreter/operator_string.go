@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+  "regexp"
 
 	"github.com/google/cql/internal/datehelpers"
 	"github.com/google/cql/model"
@@ -308,4 +309,27 @@ func evalUpper(m model.IUnaryExpression, strObj result.Value) (result.Value, err
 		return result.Value{}, err
 	}
 	return result.New(strings.ToUpper(str))
+}
+
+// Matches(argument String, pattern String) Boolean
+// https://cql.hl7.org/09-b-cqlreference.html#matches
+func evalMatches(m model.IBinaryExpression, argString, patternString result.Value) (result.Value, error) {
+  if result.IsNull(argString) || result.IsNull(patternString) {
+		return result.New(nil)
+	}
+  argStr, err := result.ToString(argString)
+  if err != nil {
+		return result.Value{}, err
+	}
+  patternStr, err := result.ToString(patternString)
+  if err != nil {
+		return result.Value{}, err
+	}
+  re, err := regexp.Compile(patternStr)
+  if err != nil {
+    return result.New(false)
+  }
+  match := re.FindString(argStr)
+  res := match != ""
+  return result.New(res)
 }

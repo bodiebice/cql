@@ -1084,13 +1084,16 @@ type Coalesce struct{ *NaryExpression }
 type Concatenate struct{ *NaryExpression }
 
 // EndsWith is https://cql.hl7.org/09-b-cqlreference.html#endswith
-type EndsWith struct{ *BinaryExpression}
+type EndsWith struct{ *BinaryExpression }
 
 // LastPositionOf is https://cql.hl7.org/09-b-cqlreference.html#lastpositionof
-type LastPositionOf struct{ *BinaryExpression}
+type LastPositionOf struct{ *BinaryExpression }
 
 // Upper is https://cql.hl7.org/09-b-cqlreference.html#Upper
-type Upper struct{ *UnaryExpression}
+type Upper struct{ *UnaryExpression }
+
+// Matches is https://cql.hl7.org/09-b-cqlreference.html#matches
+type Matches struct{ *BinaryExpression }
 
 // Combine is https://cql.hl7.org/04-logicalspecification.html#combine.
 // In ELM Combine is an OperatorExpression, but we're modeling it as a NaryExpression since in CQL
@@ -1436,13 +1439,16 @@ func (a *Coalesce) GetName() string { return "Coalesce" }
 func (a *Concatenate) GetName() string { return "Concatenate" }
 
 // GetName returns the name of the system operator.
-func (a *EndsWith) GetName() string { return "EndsWith"}
+func (a *EndsWith) GetName() string { return "EndsWith" }
 
 // GetName returns the name of the system operator.
-func (a *LastPositionOf) GetName() string { return "LastPositionOf"}
+func (a *LastPositionOf) GetName() string { return "LastPositionOf" }
 
 // GetName returns the name of the system operator.
-func (a *Upper) GetName() string { return "Upper"}
+func (a *Upper) GetName() string { return "Upper" }
+
+// GetName returns the name of the system operator.
+func (a *Matches) GetName() string { return "Matches" }
 
 // GetName returns the name of the system operator.
 func (a *Date) GetName() string { return "Date" }
