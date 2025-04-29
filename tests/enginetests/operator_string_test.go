@@ -761,7 +761,7 @@ func TestMatches(t *testing.T) {
 		},
 		{
 			name: "MatchesWordsAndSpacesFalse",
-			cql: "Matches('Not all who wander are lost - circa 2017', '^[\\w]+$')",
+			cql: "Matches('Not all who wander are lost - circa 2017', '^[\\w\\s]+$')",
 			wantResult: newOrFatal(t, false),
 		},
 		{
